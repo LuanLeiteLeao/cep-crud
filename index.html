@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>cadastro de UFs</title>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+
+
+    <style>
+        .app-main{
+            background-color: #c2bcbc;
+            width: 60%;
+            text-align:center;
+            margin-top:20px;
+            margin-left: auto;
+            margin-right: auto;    
+        }
+
+        .titulo-page{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .form-uf-cadastro{
+            text-align: left;
+            margin-left: 50px;
+            margin-right: 50px;
+            padding-bottom: 20px;
+        }
+
+        
+    </style>
+
+</head>
+<body>
+    <div class="app-main">
+        <h2 class="titulo-page">Cadastro de UF</h2>
+        <form class="form-uf-cadastro" action="">
+            <div class="form-group">
+                <label for="inputNome">Nome*</label>
+                <input class="form-control"  id="inputNome" type="text" name="nome" >
+            </div>
+            <div class="form-group">
+                <label for="inputStatus" >Sigla*</label>
+                <input class="form-control" type="text" name="sigla" >
+            </div>
+            <div class="form-group">
+                <label for="inputSigla">Status*</label>
+                <input class="form-control" id="inputSigla" type="text" name="status" >
+            </div>
+            
+        </form>
+    </div>
+</body>
+</html>
