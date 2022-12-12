@@ -1,56 +1,98 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html ng-app="cepCrud" lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>cadastro de UFs</title>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-
-
     <style>
-        .app-main{
+        .app-main {
             background-color: #c2bcbc;
             width: 60%;
-            text-align:center;
-            margin-top:20px;
+            text-align: center;
+            margin-top: 20px;
             margin-left: auto;
-            margin-right: auto;    
+            margin-right: auto;
         }
 
-        .titulo-page{
+        .titulo-page {
             padding-top: 10px;
             padding-bottom: 10px;
         }
 
-        .form-uf-cadastro{
+        .form-uf-cadastro {
             text-align: left;
             margin-left: 50px;
             margin-right: 50px;
             padding-bottom: 20px;
         }
 
-        
+        .botao-form-salvar{
+            margin-top:  30px;
+        }
+
+        .form-group{
+            margin-top: 10px;
+        }
     </style>
 
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="js/directives/uiToFirstUpeerCase.js"></script>
+    <script src="js/directives/uiJustLetters.js"></script>
+    <script src="js/directives/uiToUpeerCase.js"></script>
+    <script src="js/services/ufsAPIService.js"></script>
+
+    <script>
+
+        cepCrud = angular.module("cepCrud", []);
+        angular.module("cepCrud").controller("cepCrudCtrl", function ($scope,ufsAPIService) {
+            $scope.oi = "oioioio"
+
+            console.log("oi")
+            console.log($scope.oi)
+
+            $scope.adicionarUf= function(uf){
+               ufsAPIService.save(uf).then(()=>{
+                   alert("salvo com sucesso")
+               }).catch(()=>{
+                   alert("erro ao salvar")
+               })
+            }
+        });
+
+        </script>
 </head>
-<body>
+
+<body ng-controller="cepCrudCtrl">
+    {{'oi'}}
     <div class="app-main">
         <h2 class="titulo-page">Cadastro de UF</h2>
-        <form class="form-uf-cadastro" action="">
+        <br>
+        {{uf}}
+        <br>
+        <form class="form-uf-cadastro needs-validation" action="">
             <div class="form-group">
                 <label for="inputNome">Nome*</label>
-                <input class="form-control"  id="inputNome" type="text" name="nome" >
+                <input class="form-control is-vali" id="inputNome" type="text" ng-model="uf.nome" name="nome"
+                    ng-maxlength="30" maxlength="30" required  >
             </div>
             <div class="form-group">
-                <label for="inputStatus" >Sigla*</label>
-                <input class="form-control" type="text" name="sigla" >
+                <label for="inputStatus">Sigla*</label>
+                <input class="form-control" type="text" ng-model="uf.sigla" name="sigla" minlength="2" maxlength="2"
+                    ng-minlength="2" ng-maxlength="2" required ui-just-letters ui-to-upeer-case>
             </div>
-            <div class="form-group">
-                <label for="inputSigla">Status*</label>
-                <input class="form-control" id="inputSigla" type="text" name="status" >
+            <div class="form-group form-check form-switch" title="escolha uma opção : ativado ou desativado">
+                <input class="form-check-input" id="inputSigla" type="checkbox" ng-model="uf.status" name="status">
+                <label class="form-check-label" for="inputSigla">Status*</label>
             </div>
-            
+            <div class="d-grid gap-2 botao-form-salvar">
+                <button type="button" class="btn btn-primary btn-block" ng-click="adicionarUf(uf)">salvar</button>
+            </div>
+
         </form>
     </div>
 </body>
+
 </html>
